@@ -2,10 +2,9 @@ import * as should from 'should';
 import { createAppTester } from 'zapier-platform-core';
 import App from '../index';
 import { SmartcatDocument, SmartcatDocumentExportType, SmartcatDocumentStatus } from '../contracts/SmartcatDocument';
-import { SmartcatProject, SmartcatProjectStatus } from '../contracts/SmartcatProject';
 const appTester = createAppTester(App);
 
-function getRandomInt(max: number) {
+function getRandomInt(max: number): number {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
@@ -18,7 +17,7 @@ describe('Test documents CRUD', () => {
                 password: '32_xBrADOZXaB1B1JznYw0GAe8rw',
             },
             inputData: {
-                project: '9e00164b-9040-4573-954c-27de95fa9121',
+                project: '2195037d-18c6-4f68-9c7d-d41bfff57e15',
                 file: 'https://www.smartcat.ai/_vuepromo_img/social.svg',
                 name: `social_${getRandomInt(1000000)}.xml`,
             },
@@ -28,7 +27,7 @@ describe('Test documents CRUD', () => {
         for (let i = 0; i < documents.length; i++) {
             should(documents[i].id).not.null();
         }
-    }).timeout(5000);
+    }).timeout(10000);
 
     it('Should update a existing document', async () => {
         const bundle = {

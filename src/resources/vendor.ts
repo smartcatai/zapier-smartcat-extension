@@ -1,6 +1,4 @@
 import { getVendors, getVendor, searchVendors } from '../contracts/SmartcatVendor';
-import { SmartcatProjectStatus } from '../contracts/SmartcatProject';
-import { SmartcatDocumentValidationStatus } from '../contracts/SmartcatDocument';
 
 const Vendor = {
     key: 'vendor',

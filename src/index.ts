@@ -1,46 +1,45 @@
-import {Authentication, addAuthHeaders} from "./authentication";
-import { version as platformVersion } from "zapier-platform-core";
-const { version } = require("../package.json");
+import { Authentication, addAuthHeaders } from './authentication';
+import { version as platformVersion } from 'zapier-platform-core';
+import { version as connectorVersion } from '../package.json';
 
-import Vendor from "./resources/vendor";
+import Vendor from './resources/vendor';
 
-
-import Country from "./resources/country";
-import Client from "./resources/client";
-import Project from "./resources/project";
-import Document from "./resources/document";
-import ExportDocumentAction from "./actions/exportDocumentAction";
-import downloadFile from "./tools/hydrator";
-import UpdateDocumentAction from "./actions/updateDocumentAction";
+import Country from './resources/country';
+import Client from './resources/client';
+import Project from './resources/project';
+import Document from './resources/document';
+import ExportDocumentAction from './actions/exportDocumentAction';
+import downloadFile from './tools/hydrator';
+import UpdateDocumentAction from './actions/updateDocumentAction';
 
 const App = {
-  version,
-  platformVersion,
+    version: connectorVersion,
+    platformVersion,
 
-  authentication: Authentication,
+    authentication: Authentication,
 
-  beforeRequest: [addAuthHeaders],
+    beforeRequest: [addAuthHeaders],
 
-  afterResponse: [],
+    afterResponse: [],
 
-  hydrators:{downloadFile},
+    hydrators: { downloadFile },
 
-  resources: {
-    [Vendor.key]: Vendor as any,
-    [Country.key]: Country as any,
-    [Client.key]: Client as any,
-    [Project.key]: Project as any,
-    [Document.key]: Document as any
-  },
+    resources: {
+        [Vendor.key]: Vendor as any,
+        [Country.key]: Country as any,
+        [Client.key]: Client as any,
+        [Project.key]: Project as any,
+        [Document.key]: Document as any,
+    },
 
-  triggers: {},
+    triggers: {},
 
-  searches: {},
+    searches: {},
 
-  creates: {
-    [ExportDocumentAction.key]: ExportDocumentAction as any,
-    [UpdateDocumentAction.key]: UpdateDocumentAction as any
-  }
+    creates: {
+        [ExportDocumentAction.key]: ExportDocumentAction as any,
+        [UpdateDocumentAction.key]: UpdateDocumentAction as any,
+    },
 };
 
 export default App;

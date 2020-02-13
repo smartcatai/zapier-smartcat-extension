@@ -9,7 +9,8 @@
     //   "es2018"
     // ],
     "outDir": "./lib",
-    "rootDir": "./src",
-    "strict": true
+//    "rootDir": "./src",
+    "strict": true,
+    "resolveJsonModule": true
   }
 }

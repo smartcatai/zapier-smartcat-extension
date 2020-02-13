@@ -1,11 +1,4 @@
-import {
-    uploadFile,
-    SmartcatDocumentStatus,
-    SmartcatDocumentValidationStatus,
-    getDocuments,
-    searchDocuments,
-} from '../contracts/SmartcatDocument';
-import { getProjects, SmartcatProjectStatus } from '../contracts/SmartcatProject';
+import { uploadFile, SmartcatDocumentStatus, getDocuments, searchDocuments } from '../contracts/SmartcatDocument';
 
 const Document = {
     key: 'document',

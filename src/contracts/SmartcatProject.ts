@@ -1,7 +1,7 @@
 import { Bundle, ZObject } from 'zapier-platform-core';
 import { Servers } from '../tools/servers';
 import { Routes } from '../tools/routes';
-import { checkValidationStatus, SmartcatDocument, SmartcatDocumentValidationStatus } from './SmartcatDocument';
+import { checkValidationStatus, SmartcatDocument } from './SmartcatDocument';
 import * as FormData from 'form-data';
 
 export const SmartcatProjectStatus = {
@@ -55,6 +55,7 @@ class CreateProjectCommand {
     readonly isForTesting: boolean;
     readonly externalTag: string;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public constructor(public data: any) {
         this.name = data.name;
         this.description = data.description;
@@ -71,6 +72,22 @@ class CreateProjectCommand {
         this.isForTesting = false;
         this.externalTag = 'source:Zapier';
     }
+}
+
+export async function getProjectList(z: ZObject, server: string, client: string | null): Promise<SmartcatProject[]> {
+    const url = `https://${Servers[server]}${Routes.GetProjectList}`;
+    const response = await z.request({ url: url });
+    if (response.status != 200) throw new Error(response.content);
+    let projects = z.JSON.parse(response.content) as SmartcatProject[];
+    if (client) projects = projects.filter(value => value.clientId == client);
+    return projects;
+}
+
+export async function getProjectById(z: ZObject, server: string, project: string): Promise<SmartcatProject> {
+    const url = `https://${Servers[server]}${Routes.GetProject}/${project}`;
+    const response = await z.request({ url: url });
+    if (response.status != 200) throw new Error(response.content);
+    return z.JSON.parse(response.content) as SmartcatProject;
 }
 
 export async function getProjects(
@@ -100,7 +117,7 @@ export async function getProject(z: ZObject, bundle: Bundle<{ id: string }>): Pr
     return await getProjectById(z, bundle.authData.server, bundle.inputData.id);
 }
 
-export async function createProject(z: ZObject, bundle: Bundle) {
+export async function createProject(z: ZObject, bundle: Bundle): Promise<SmartcatProject> {
     const createCommand = new CreateProjectCommand(bundle.inputData);
 
     const form = new FormData();
@@ -114,21 +131,5 @@ export async function createProject(z: ZObject, bundle: Bundle) {
     const response = await z.request({ method: 'POST', url: url, headers: headers, body: form });
     if (response.status != 200) throw new Error(response.content);
 
-    return z.JSON.parse(response.content) as SmartcatProject;
-}
-
-export async function getProjectList(z: ZObject, server: string, client: string | null): Promise<SmartcatProject[]> {
-    const url = `https://${Servers[server]}${Routes.GetProjectList}`;
-    const response = await z.request({ url: url });
-    if (response.status != 200) throw new Error(response.content);
-    let projects = z.JSON.parse(response.content) as SmartcatProject[];
-    if (client) projects = projects.filter(value => value.clientId == client);
-    return projects;
-}
-
-export async function getProjectById(z: ZObject, server: string, project: string): Promise<SmartcatProject> {
-    const url = `https://${Servers[server]}${Routes.GetProject}/${project}`;
-    const response = await z.request({ url: url });
-    if (response.status != 200) throw new Error(response.content);
     return z.JSON.parse(response.content) as SmartcatProject;
 }

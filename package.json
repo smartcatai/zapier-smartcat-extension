@@ -1,12 +1,15 @@
 {
   "name": "translation-manager-for-zapier",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A Smartcat translation manager app for the Zapier platform.",
   "repository": "smartcatai/zapier-smartcat-extension",
   "homepage": "https://www.smartcat.ai",
   "author": "Anton Lysak <anton@smartcat.ai>",
+  "contributors": [
+    "Andrey Savenkov <a.savenkov@smartcat.ai>"
+  ],
   "license": "BSD-3-Clause",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "zapier-clean": "rimraf ./lib || rimraf ./build",
     "zapier-build": "npm run zapier-clean && tsc",
@@ -16,7 +19,7 @@
     "prepare": "npm run zapier-build",
     "pretest": "npm run zapier-build",
     "test": "mocha --compilers ts:ts-node/register ./src/test/*.ts",
-    "lint": "eslint --fix ./src/**/*.ts"
+    "lint": "eslint --fix ./src/*.ts ./src/**/*.ts"
   },
   "engines": {
     "node": ">=8.10.0",

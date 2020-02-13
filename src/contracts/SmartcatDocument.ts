@@ -60,6 +60,13 @@ interface ExportModel {
     exportType: string;
 }
 
+async function GetFile(z: ZObject, file: string, name: string): Promise<FormData> {
+    const response = await z.request(file);
+    const form = new FormData();
+    form.append('body', response.content, { contentType: 'application/octet-stream', filename: name });
+    return form;
+}
+
 export function checkValidationStatus(documents: SmartcatDocument[], status: string): boolean {
     if (status == SmartcatDocumentValidationStatus.inProgress) {
         const any = documents.find(
@@ -85,7 +92,7 @@ export function checkValidationStatus(documents: SmartcatDocument[], status: str
 export async function uploadFile(
     z: ZObject,
     bundle: Bundle<{ project: string; file: string; name: string }>,
-): Promise<any> {
+): Promise<{ documents: SmartcatDocument[] }> {
     const form = await GetFile(z, bundle.inputData.file, bundle.inputData.name);
 
     const url = `https://${Servers[bundle.authData.server]}${Routes.UploadProjectDocument}?projectId=${
@@ -102,7 +109,7 @@ export async function uploadFile(
 export async function updateFile(
     z: ZObject,
     bundle: Bundle<{ document: string; name: string; file: string }>,
-): Promise<any> {
+): Promise<{ documents: SmartcatDocument[] }> {
     const form = await GetFile(z, bundle.inputData.file, bundle.inputData.name);
 
     const url = `https://${Servers[bundle.authData.server]}${Routes.UpdateDocument}?documentId=${
@@ -127,6 +134,7 @@ export async function exportDocument(
     const response = await z.request({ url: url, method: 'POST', headers: { Accept: 'application/json' } });
     if (response.status != 200) throw Error(response.content);
     const task = z.JSON.parse(response.content);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const expandedZ = z as any;
     const link = expandedZ.dehydrateFile(downloadFile, { exportId: task.id });
     return { file: link, exportId: task.id };
@@ -162,11 +170,4 @@ export async function searchDocuments(
     if (bundle.inputData.name)
         documents = documents.filter(value => value.name.includes(bundle.inputData.name as string));
     return documents;
-}
-
-async function GetFile(z: ZObject, file: string, name: string) {
-    const response = await z.request(file);
-    const form = new FormData();
-    form.append('body', response.content, { contentType: 'application/octet-stream', filename: name });
-    return form;
 }

@@ -1,14 +1,4 @@
-import {
-    SmartcatProjectStage,
-    SmartcatProjectStatus,
-    getProjects,
-    getProject,
-    createProject,
-    searchProjects,
-} from '../contracts/SmartcatProject';
-import { SmartcatLanguages } from '../contracts/SmartcatLanguages';
-import { SmartcatDocumentValidationStatus } from '../contracts/SmartcatDocument';
-import { createJob, Currency, SmartcatJobStatus, SupplierType } from '../contracts/SmartcatJob';
+import { createJob, Currency, SupplierType } from '../contracts/SmartcatJob';
 
 const Job = {
     key: 'job',

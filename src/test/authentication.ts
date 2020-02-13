@@ -14,7 +14,7 @@ describe('Test authentication', () => {
         };
 
         try {
-            const response = await appTester(App.authentication.test, bundle);
+            await appTester(App.authentication.test, bundle);
         } catch (error) {
             should(error.message).containEql('The Account Id and/or API Key you supplied is incorrect');
         }
