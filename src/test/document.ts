@@ -1,4 +1,4 @@
-import should = require("should");
+import * as should from "should";
 import { createAppTester } from "zapier-platform-core";
 import App from "../index";
 import {SmartcatDocument, SmartcatDocumentExportType, SmartcatDocumentStatus} from "../contracts/SmartcatDocument";

@@ -229,4 +229,4 @@ export const SmartcatLanguages ={
     "zh-Hant-TW": "Chinese (T)",
     "zu": "Zulu",
     "zu-ZA": "Zulu (South Africa)"
-}
+};

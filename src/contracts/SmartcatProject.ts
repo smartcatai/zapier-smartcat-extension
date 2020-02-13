@@ -107,7 +107,7 @@ export async function createProject(z: ZObject, bundle: Bundle){
 }
 
 export async function getProjectList(z: ZObject, server:string, client:string|null): Promise<SmartcatProject[]> {
-    const url = `https://${Servers[server]}${Routes.GetProjects}`;
+    const url = `https://${Servers[server]}${Routes.GetProjectList}`;
     const response = await z.request({url: url});
     if (response.status != 200) throw new Error(response.content);
     let projects = z.JSON.parse(response.content) as SmartcatProject[];

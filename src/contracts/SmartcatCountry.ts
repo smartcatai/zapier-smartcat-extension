@@ -9,7 +9,7 @@ export interface SmartcatCountry {
 }
 
 export const getCountries = async (z: ZObject, bundle: Bundle) : Promise<SmartcatCountry[]> => {
-    const url = `https://${Servers[bundle.authData.server]}${Routes.GetCountries}`;
+    const url = `https://${Servers[bundle.authData.server]}${Routes.GetDirectoryCountries}`;
     const response = await z.request({url: url});
     if (response.status != 200) throw new Error(response.content);
     const data = z.JSON.parse(response.content);

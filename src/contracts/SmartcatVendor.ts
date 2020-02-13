@@ -8,7 +8,7 @@ export interface SmartcatVendor {
 }
 
 export const getVendors = async (z: ZObject, bundle: Bundle) : Promise<SmartcatVendor[]> => {
-    const url = `https://${Servers[bundle.authData.server]}${Routes.GetVendors}`;
+    const url = `https://${Servers[bundle.authData.server]}${Routes.GetDirectoryVendors}`;
     const response = await z.request({url: url});
     if (response.status != 200) throw new Error(response.content);
     const data = z.JSON.parse(response.content);

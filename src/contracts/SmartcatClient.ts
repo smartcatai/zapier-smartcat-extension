@@ -8,7 +8,7 @@ export interface SmartcatClient {
 }
 
 export const getClients = async (z: ZObject, bundle: Bundle) : Promise<SmartcatClient[]> => {
-    const url = `https://${Servers[bundle.authData.server]}${Routes.GetClients}`;
+    const url = `https://${Servers[bundle.authData.server]}${Routes.GetDirectoryClients}`;
     const response = await z.request({url: url});
     if (response.status != 200) throw new Error(response.content);
 

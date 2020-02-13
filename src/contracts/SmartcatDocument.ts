@@ -3,7 +3,7 @@ import {Servers} from "../tools/servers";
 import {Routes} from "../tools/routes";
 import downloadFile from "../tools/hydrator";
 import {getProjectById, getProjectList, getProjects, SmartcatProject} from "./SmartcatProject";
-const Multipart = require('multipart-stream');
+import * as FormData from "form-data";
 
 
 export interface SmartcatDocument {
@@ -80,8 +80,8 @@ export function checkValidationStatus(documents: SmartcatDocument[], status:stri
 export async function uploadFile(z:ZObject, bundle:Bundle<{project:string, file:string, name:string}>): Promise<any> {
     const form = await GetFile(z, bundle.inputData.file, bundle.inputData.name);
 
-    const url = `https://${Servers[bundle.authData.server]}${Routes.UploadDocument}?projectId=${bundle.inputData.project}`;
-    const headers = {'Content-Type': `multipart/form-data; boundary="${form.boundary}"`};
+    const url = `https://${Servers[bundle.authData.server]}${Routes.UploadProjectDocument}?projectId=${bundle.inputData.project}`;
+    const headers = {'Content-Type': `multipart/form-data; boundary="${form.getBoundary()}"`};
     const response = await z.request({method: "POST", url: url, headers: headers, body: form});
 
     if (response.status != 200) throw Error(response.content);
@@ -93,7 +93,7 @@ export async function updateFile(z:ZObject, bundle:Bundle<{document:string, name
     const form = await GetFile(z, bundle.inputData.file, bundle.inputData.name);
 
     const url = `https://${Servers[bundle.authData.server]}${Routes.UpdateDocument}?documentId=${bundle.inputData.document}`;
-    const headers = {'Content-Type': `multipart/form-data; boundary="${form.boundary}"`};
+    const headers = {'Content-Type': `multipart/form-data; boundary="${form.getBoundary()}"`};
     const response = await z.request({method: "PUT", url: url, headers: headers, body: form});
 
     if (response.status != 200) throw Error(response.content);
@@ -105,7 +105,7 @@ export async function exportDocument(z:ZObject, bundle:Bundle<ExportModel>): Pro
     let queryParams = '?';
     if (bundle.inputData.id) queryParams += `documentIds[]=${bundle.inputData.id}`;
     if (bundle.inputData.exportType) queryParams += `&type=${bundle.inputData.exportType}`;
-    const url = `https://${Servers[bundle.authData.server]}${Routes.CreateExport}${queryParams}`;
+    const url = `https://${Servers[bundle.authData.server]}${Routes.CreateDocumentExport}${queryParams}`;
     const response = await z.request({url: url, method: 'POST', headers: {'Accept': 'application/json'}});
     if (response.status != 200) throw Error(response.content);
     const task = z.JSON.parse(response.content);
@@ -138,8 +138,7 @@ export async function searchDocuments(z:ZObject, bundle:Bundle<{name: string | n
 
 async function GetFile(z:ZObject, file:string, name:string) {
     let response = await z.request(file);
-    const form = new Multipart();
-    const partHeaders = {'Content-Disposition': `form-data; name="file_"; filename="${name}"`, 'Content-Type': 'application/octet-stream'};
-    form.addPart({headers: partHeaders, body: response.content});
+    const form = new FormData();
+    form.append('body', response.content, {contentType: 'application/octet-stream', filename: name});
     return form;
 }
