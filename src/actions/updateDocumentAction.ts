@@ -1,4 +1,4 @@
-import {updateFile} from "../contracts/SmartcatDocument";
+import { updateFile } from '../contracts/SmartcatDocument';
 
 const UpdateDocumentAction = {
     key: 'update_document',
@@ -6,17 +6,17 @@ const UpdateDocumentAction = {
     noun: 'Update',
     display: {
         label: 'Update document',
-        description: 'Update an existing document'
+        description: 'Update an existing document',
     },
 
     operation: {
         inputFields: [
-            {key: 'document', required: true, dynamic: "document.id.name"},
-            {key: 'file', required: true, type: 'file', label: 'File'},
-            {key: 'name', required: true, type: 'string', label: 'File Name'},
+            { key: 'document', required: true, dynamic: 'document.id.name' },
+            { key: 'file', required: true, type: 'file', label: 'File' },
+            { key: 'name', required: true, type: 'string', label: 'File Name' },
         ],
-        perform: updateFile
-    }
+        perform: updateFile,
+    },
 };
 
 export default UpdateDocumentAction;

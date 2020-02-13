@@ -1,33 +1,40 @@
-import {SmartcatProjectStage, SmartcatProjectStatus, getProjects, getProject, createProject, searchProjects} from "../contracts/SmartcatProject";
-import {SmartcatLanguages} from "../contracts/SmartcatLanguages";
-import {SmartcatDocumentValidationStatus} from "../contracts/SmartcatDocument";
-import {createJob, Currency, SmartcatJobStatus, SupplierType} from "../contracts/SmartcatJob";
+import {
+    SmartcatProjectStage,
+    SmartcatProjectStatus,
+    getProjects,
+    getProject,
+    createProject,
+    searchProjects,
+} from '../contracts/SmartcatProject';
+import { SmartcatLanguages } from '../contracts/SmartcatLanguages';
+import { SmartcatDocumentValidationStatus } from '../contracts/SmartcatDocument';
+import { createJob, Currency, SmartcatJobStatus, SupplierType } from '../contracts/SmartcatJob';
 
 const Job = {
-    key: "job",
-    noun: "Job",
+    key: 'job',
+    noun: 'Job',
 
-    create:{
+    create: {
         display: {
-            label: "Create job",
-            description: "Creates a new job."
+            label: 'Create job',
+            description: 'Creates a new job.',
         },
 
         operation: {
             inputFields: [
-                {key: 'email', required: true, type: 'string', label: 'Supplier email'},
-                {key: 'name', required: true, type: 'string', label: 'Supplier name'},
-                {key: 'type', required: true, choice: SupplierType, type: 'string', label: 'Supplier type'},
-                {key: 'service', required: true, type: 'string', label: 'Service type'},
-                {key: 'description', required: true, type: 'string', label: 'Job description'},
-                {key: 'unit', required: true, type: 'string', label: 'Unit type'},
-                {key: 'count', required: true, type: 'string', label: 'Unit count'},
-                {key: 'price', required: true, type: 'number', label: 'Price per unit'},
-                {key: 'currency', choices: Currency, required: true, type: 'string', label: 'Currency'},
-                {key: 'externalNumber', type: 'string', label: 'External job number'},
+                { key: 'email', required: true, type: 'string', label: 'Supplier email' },
+                { key: 'name', required: true, type: 'string', label: 'Supplier name' },
+                { key: 'type', required: true, choice: SupplierType, type: 'string', label: 'Supplier type' },
+                { key: 'service', required: true, type: 'string', label: 'Service type' },
+                { key: 'description', required: true, type: 'string', label: 'Job description' },
+                { key: 'unit', required: true, type: 'string', label: 'Unit type' },
+                { key: 'count', required: true, type: 'string', label: 'Unit count' },
+                { key: 'price', required: true, type: 'number', label: 'Price per unit' },
+                { key: 'currency', choices: Currency, required: true, type: 'string', label: 'Currency' },
+                { key: 'externalNumber', type: 'string', label: 'External job number' },
             ],
-            perform: createJob
-        }
+            perform: createJob,
+        },
     },
 
     // list: {

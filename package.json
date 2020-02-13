@@ -15,7 +15,8 @@
     "zapier-push": "npm run zapier-build && zapier push",
     "prepare": "npm run zapier-build",
     "pretest": "npm run zapier-build",
-    "test": "mocha --compilers ts:ts-node/register ./src/test/*.ts"
+    "test": "mocha --compilers ts:ts-node/register ./src/test/*.ts",
+    "lint": "eslint --fix ./src/**/*.ts"
   },
   "engines": {
     "node": ">=8.10.0",
@@ -28,7 +29,13 @@
   "devDependencies": {
     "@types/mocha": "5.2.0",
     "@types/node": "10.17.9",
+    "@typescript-eslint/eslint-plugin": "^2.19.2",
+    "@typescript-eslint/parser": "^2.19.2",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
     "mocha": "5.1.0",
+    "prettier": "^1.19.1",
     "rimraf": "3.0.0",
     "should": "13.2.1",
     "ts-node": "^8.6.2",
