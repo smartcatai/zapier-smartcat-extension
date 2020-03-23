@@ -3,7 +3,7 @@ import { Bundle, ZObject } from 'zapier-platform-core';
 import { Servers } from './tools/servers';
 import { Routes } from './tools/routes';
 
-const test = async (z: ZObject, bundle: Bundle) => {
+const test = async (z: ZObject, bundle: Bundle): Promise<SmartcatAccount> => {
     const url = `https://${Servers[bundle.authData.server]}${Routes.GetAccount}`;
     const response = await z.request({ url: url, method: 'GET' });
     if (response.status === 401) {
@@ -41,7 +41,8 @@ export const Authentication = {
     ],
 };
 
-export const addAuthHeaders = (request: Request, z: ZObject, bundle: Bundle) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const addAuthHeaders = (request: Request, z: ZObject, bundle: Bundle): any => {
     const data = `${bundle.authData.login}:${bundle.authData.password}`;
     const buffer = Buffer.alloc(data.length, data);
     const basicHash = buffer.toString('base64');

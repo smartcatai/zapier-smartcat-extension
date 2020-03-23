@@ -37,7 +37,7 @@ describe('Test documents CRUD', () => {
                 password: '32_xBrADOZXaB1B1JznYw0GAe8rw',
             },
             inputData: {
-                document: 'b42aacd1bffadd1bb54f1bf0_94',
+                document: 'efd9f447f5513d1bb54f1b64_9',
                 file: 'https://www.smartcat.ai/_vuepromo_img/social.svg',
                 name: `social_${getRandomInt(1000000)}.xml`,
             },

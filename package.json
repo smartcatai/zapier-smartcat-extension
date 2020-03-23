@@ -1,6 +1,6 @@
 {
   "name": "translation-manager-for-zapier",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A Smartcat translation manager app for the Zapier platform.",
   "repository": "smartcatai/zapier-smartcat-extension",
   "homepage": "https://www.smartcat.ai",
@@ -27,11 +27,12 @@
   },
   "dependencies": {
     "form-data": "^3.0.0",
-    "zapier-platform-core": "9.0.0"
+    "zapier-platform-core": "9.1.0"
   },
   "devDependencies": {
     "@types/mocha": "5.2.0",
     "@types/node": "10.17.9",
+    "@types/should": "^13.0.0",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
     "eslint": "^6.8.0",

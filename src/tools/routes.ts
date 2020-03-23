@@ -11,4 +11,5 @@ export const Routes = {
     GetDirectoryClients: '/api/integration/v1/directory?type=client',
     GetClient: '/api/integration/v2/client',
     CreateJob: '/api/integration/v2/invoice/job',
+    GetInvoiceList: '/api/integration/v2/invoice/list',
 };
