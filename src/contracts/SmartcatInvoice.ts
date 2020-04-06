@@ -19,24 +19,27 @@ export interface GetInvoicesDto {
 }
 
 export async function getInvoices(z: ZObject, bundle: Bundle<GetInvoicesDto>): Promise<SmartcatInvoice[]> {
-    const queryParams = [];
-    if (bundle.inputData.dateCreatedFrom) {
-        const startDate = bundle.inputData.dateCreatedFrom.split('+')[0] + 'Z';
-        queryParams.push(`dateCreatedFrom=${startDate}`);
+    let invoices: SmartcatInvoice[] = [];
+    const from = bundle.inputData.dateCreatedFrom as Date;
+    const to = bundle.inputData.dateCreatedTo as Date;
+
+    let i = 0;
+    const limit = 10;
+    while (true){
+        let batch = await getBatchOfInvoices(z, bundle.authData.server, from, to, i, limit);
+        batch.forEach(value => invoices.push(value));
+        if (batch.length < limit) return invoices;
+        i += limit;
     }
-    if (bundle.inputData.dateCreatedTo) {
-        const endDate = bundle.inputData.dateCreatedTo.split('+')[0] + 'Z';
-        queryParams.push(`dateCreatedTo=${endDate}`);
-    }
-    if (bundle.inputData.limit) queryParams.push(`limit=${bundle.inputData.limit}`);
-    if (bundle.inputData.skip) queryParams.push(`skip=${bundle.inputData.skip}`);
-    const query = queryParams.length > 0 ? '?' + queryParams.join('&') : '';
-    const url = `https://${Servers[bundle.authData.server]}${Routes.GetInvoiceList}${query}`;
+}
+
+async function getBatchOfInvoices(z: ZObject, server: string, from: Date, to: Date, skip: number, limit: number): Promise<SmartcatInvoice[]> {
+    const url = `https://${Servers[server]}${Routes.GetInvoiceList}?dateCreatedFrom=${from}&dateCreatedTo=${to}&skip=${skip}&limit=${limit}`;
     const response = await z.request({ url: url });
     if (response.status != 200) throw new Error(response.content);
     const items = z.JSON.parse(response.content);
     items.forEach((item: SmartcatInvoice) => {
         item.id = item.number;
     });
-    return items as SmartcatInvoice[];
+    return items;
 }
