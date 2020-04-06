@@ -45,7 +45,7 @@ describe('Test vendor CRUD', () => {
             },
         };
         const response = (await appTester(App.resources.vendor.search.operation.perform, bundle)) as SmartcatVendor[];
-        should(response.length).equal(2);
+        should(response.length).equal(1);
         response.forEach(item => {
             should(item.name).not.empty();
             should(item.name).containEql('Railways');
