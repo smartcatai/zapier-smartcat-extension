@@ -1,3 +1,4 @@
+const dateFormat = require('dateformat');
 import { Bundle, ZObject } from 'zapier-platform-core';
 import { Servers } from '../tools/servers';
 import { Routes } from '../tools/routes';
@@ -19,24 +20,33 @@ export interface GetInvoicesDto {
 }
 
 export async function getInvoices(z: ZObject, bundle: Bundle<GetInvoicesDto>): Promise<SmartcatInvoice[]> {
-    const queryParams = [];
-    if (bundle.inputData.dateCreatedFrom) {
-        const startDate = bundle.inputData.dateCreatedFrom.split('+')[0] + 'Z';
-        queryParams.push(`dateCreatedFrom=${startDate}`);
+    z.console.log(`from:${bundle.inputData.dateCreatedFrom}`);
+    z.console.log(`to:${bundle.inputData.dateCreatedTo}`);
+    let invoices: SmartcatInvoice[] = [];
+    const from = bundle.inputData.dateCreatedFrom;
+    const to = bundle.inputData.dateCreatedTo;
+
+    let i = 0;
+    const limit = 10;
+    while (true){
+        let batch = await getBatchOfInvoices(z, bundle.authData.server, new Date(from), new Date(to), i, limit);
+        batch.forEach(value => invoices.push(value));
+        if (batch.length < limit) return invoices;
+        i += limit;
     }
-    if (bundle.inputData.dateCreatedTo) {
-        const endDate = bundle.inputData.dateCreatedTo.split('+')[0] + 'Z';
-        queryParams.push(`dateCreatedTo=${endDate}`);
-    }
-    if (bundle.inputData.limit) queryParams.push(`limit=${bundle.inputData.limit}`);
-    if (bundle.inputData.skip) queryParams.push(`skip=${bundle.inputData.skip}`);
-    const query = queryParams.length > 0 ? '?' + queryParams.join('&') : '';
-    const url = `https://${Servers[bundle.authData.server]}${Routes.GetInvoiceList}${query}`;
+}
+
+async function getBatchOfInvoices(z: ZObject, server: string, from: Date, to: Date, skip: number, limit: number): Promise<SmartcatInvoice[]> {
+    const formattedFrom = dateFormat(from, 'isoUtcDateTime');
+    const formattedTo = dateFormat(to, 'isoUtcDateTime');
+    const url = `https://${Servers[server]}${Routes.GetInvoiceList}?dateCreatedFrom=${formattedFrom}&dateCreatedTo=${formattedTo}&skip=${skip}&limit=${limit}`;
+    z.console.log(`url:${url}`);
     const response = await z.request({ url: url });
     if (response.status != 200) throw new Error(response.content);
+    z.console.log(`content:${response.content}`);
     const items = z.JSON.parse(response.content);
     items.forEach((item: SmartcatInvoice) => {
         item.id = item.number;
     });
-    return items as SmartcatInvoice[];
+    return items;
 }

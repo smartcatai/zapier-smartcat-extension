@@ -41,14 +41,14 @@ describe('Test vendor CRUD', () => {
                 password: '32_xBrADOZXaB1B1JznYw0GAe8rw',
             },
             inputData: {
-                name: 's',
+                name: 'Railways',
             },
         };
         const response = (await appTester(App.resources.vendor.search.operation.perform, bundle)) as SmartcatVendor[];
-        should(response.length).equal(2);
+        should(response.length).equal(1);
         response.forEach(item => {
             should(item.name).not.empty();
-            should(item.name).containEql('s');
+            should(item.name).containEql('Railways');
             should(item.id).not.empty();
         });
     });

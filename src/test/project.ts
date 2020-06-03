@@ -117,10 +117,10 @@ describe('Test project CRUD', () => {
                 server: 'europe',
             },
             inputData: {
-                id: '7c5afef8-fab3-48f0-8b25-c9e5dd3c5f95',
+                id: '1795057f-965f-496e-95b7-23a655f5f2c5',
             },
         };
         const response = (await appTester(App.resources.project.get.operation.perform, bundle)) as SmartcatProject;
-        should(response.id).equals('7c5afef8-fab3-48f0-8b25-c9e5dd3c5f95');
+        should(response.id).equals('1795057f-965f-496e-95b7-23a655f5f2c5');
     }).timeout(10000);
 });
