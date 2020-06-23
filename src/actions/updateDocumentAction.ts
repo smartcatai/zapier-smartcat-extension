@@ -5,7 +5,7 @@ const UpdateDocumentAction = {
 
     noun: 'Update',
     display: {
-        label: 'Update document',
+        label: 'Update Document',
         description: 'Update an existing document',
     },
 

@@ -6,7 +6,7 @@ const Document = {
 
     create: {
         display: {
-            label: 'Add file',
+            label: 'Add File',
             description: 'Adds a new file to the project.',
         },
         operation: {

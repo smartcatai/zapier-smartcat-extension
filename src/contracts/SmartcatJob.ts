@@ -72,3 +72,53 @@ export async function createJob(z: ZObject, bundle: Bundle): Promise<SmartcatJob
 
     return z.JSON.parse(response.content) as SmartcatJob;
 }
+
+export async function createJobs(z: ZObject, bundle: Bundle): Promise<any> {
+    const url = `https://${Servers[bundle.authData.server]}${Routes.CreateJobs}`;
+    const data: {
+        supplierEmail: any;
+        supplierName: any;
+        supplierType: any;
+        serviceType: any;
+        jobDescription: any;
+        unitsType: any;
+        unitsAmount: number;
+        pricePerUnit: number;
+        currency: any;
+        externalNumber: any;
+    }[] = [];
+    bundle.inputData.lineItems.forEach(
+        (item: {
+            email: any;
+            name: any;
+            type: any;
+            service: any;
+            description: any;
+            unit: any;
+            count: string;
+            price: string;
+            currency: any;
+            externalNumber: any;
+        }) => {
+            const model = {
+                supplierEmail: item.email,
+                supplierName: item.name,
+                supplierType: item.type,
+                serviceType: item.service,
+                jobDescription: item.description,
+                unitsType: item.unit,
+                unitsAmount: parseFloat(item.count),
+                pricePerUnit: parseFloat(item.price),
+                currency: item.currency,
+                externalNumber: item.externalNumber ? item.externalNumber : '',
+            };
+            data.push(model);
+        },
+    );
+    // z.console.log(data);
+    const response = await z.request({ url: url, method: 'POST', body: data });
+    if (response.status != 200) throw Error(response.content);
+    // z.console.log(response.content);
+
+    return { jobs: z.JSON.parse(response.content) as SmartcatJob[] };
+}
