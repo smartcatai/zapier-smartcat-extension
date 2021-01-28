@@ -35,6 +35,11 @@ const Client = {
             perform: searchClients,
         },
     },
+
+    sample: {
+        id: 1,
+        name: 'This is sample name',
+    },
 };
 
 export default Client;

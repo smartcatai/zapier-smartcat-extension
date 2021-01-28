@@ -31,6 +31,7 @@
         "zapier-platform-core": "10.0.0"
     },
     "devDependencies": {
+        "@types/dateformat": "^3.0.1",
         "@types/mocha": "5.2.0",
         "@types/node": "10.17.9",
         "@types/should": "^13.0.0",

@@ -35,6 +35,11 @@ const Vendor = {
             perform: searchVendors,
         },
     },
+
+    sample: {
+        id: 1,
+        name: 'This is sample name',
+    },
 };
 
 export default Vendor;

@@ -47,6 +47,31 @@ const Document = {
             perform: searchDocuments,
         },
     },
+
+    sample: {
+        id: '1234567890abcdef12345678_10',
+        name: 'Sample document',
+        creationDate: '2021-01-22T12:42:32.166Z',
+        deadline: '2021-01-22T16:30:00Z',
+        sourceLanguage: 'en',
+        documentDisassemblingStatus: 'success',
+        targetLanguage: 'es',
+        status: 'completed',
+        wordsCount: 489,
+        statusModificationDate: '2021-01-23T09:16:53.565Z',
+        pretranslateCompleted: false,
+        workflowStages: [
+            {
+                progress: 100.0,
+                wordsTranslated: 489,
+                unassignedWordsCount: 489,
+                status: 'completed',
+                executives: [],
+            },
+        ],
+        externalId: '1234567890abcdef12345678',
+        placeholdersAreEnabled: false,
+    },
 };
 
 export default Document;
