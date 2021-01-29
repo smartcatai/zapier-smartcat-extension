@@ -11,7 +11,7 @@ import Document from './resources/document';
 import ExportDocumentAction from './actions/exportDocumentAction';
 import downloadFile from './tools/hydrator';
 import UpdateDocumentAction from './actions/updateDocumentAction';
-import Invoice from './resources/invoice';
+// import Invoice from './resources/invoice';
 import Job from './resources/job';
 import Jobs from './resources/jobs';
 
@@ -33,7 +33,7 @@ const App = {
         [Client.key]: Client as any,
         [Project.key]: Project as any,
         [Document.key]: Document as any,
-        [Invoice.key]: Invoice as any,
+        // [Invoice.key]: Invoice as any,
         [Job.key]: Job as any,
         [Jobs.key]: Jobs as any,
     },

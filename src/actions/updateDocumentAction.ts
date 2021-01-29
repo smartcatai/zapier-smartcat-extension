@@ -16,6 +16,9 @@ const UpdateDocumentAction = {
             { key: 'name', required: true, type: 'string', label: 'File Name' },
         ],
         perform: updateFile,
+        sample: {
+            documents: [],
+        },
     },
 };
 

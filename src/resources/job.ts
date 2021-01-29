@@ -55,6 +55,19 @@ const Job = {
     //         perform: searchProjects
     //     }
     // },
+
+    sample: {
+        id: 'string',
+        status: 'inProgress',
+        freelancerId: 'string',
+        serviceType: 'string',
+        jobDescription: 'string',
+        unitsType: 'string',
+        unitsAmount: 0,
+        pricePerUnit: 0,
+        currency: 'string',
+        externalNumber: 'string',
+    },
 };
 
 export default Job;

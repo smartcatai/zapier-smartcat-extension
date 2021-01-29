@@ -2,8 +2,8 @@ import { exportDocument, SmartcatDocumentExportType } from '../contracts/Smartca
 
 const ExportDocumentAction = {
     key: 'export_document',
-
     noun: 'Export',
+
     display: {
         label: 'Export Documents',
         description:
@@ -21,6 +21,10 @@ const ExportDocumentAction = {
             { key: 'exportType', choices: SmartcatDocumentExportType, label: 'Type of result file' },
         ],
         perform: exportDocument,
+        sample: {
+            file: '',
+            exportId: 'task.id',
+        },
     },
 };
 

@@ -60,6 +60,25 @@ const Jobs = {
     //         perform: searchProjects
     //     }
     // },
+
+    sample: {
+        id: 'string',
+        invoiceNumber: 'string',
+        supplierEmail: 'string',
+        supplierName: 'string',
+        supplierType: 'freelancer',
+        serviceType: 'string',
+        jobDescription: 'string',
+        unitsType: 'string',
+        unitsAmount: 0,
+        pricePerUnit: 0,
+        currency: 'string',
+        cost: 0,
+        externalNumber: 'string',
+        supplierId: 'string',
+        status: 'inProgress',
+        projectId: 'string',
+    },
 };
 
 export default Jobs;

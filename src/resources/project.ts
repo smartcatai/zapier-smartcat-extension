@@ -142,7 +142,7 @@ const Project = {
                 placeholdersAreEnabled: false,
             },
         ],
-        externalTag: 'source:Sample',
+        // externalTag: 'source:Sample',
         specializations: [],
         managers: [],
         customFields: {},
