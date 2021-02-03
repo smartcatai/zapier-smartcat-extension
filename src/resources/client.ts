@@ -19,6 +19,7 @@ const Client = {
         display: {
             label: 'New or Updated Client',
             description: 'Triggers when a new client is created or the existing one is modified at Smartcat account.',
+            important: true,
         },
         operation: {
             perform: getClients,
@@ -34,6 +35,11 @@ const Client = {
             inputFields: [{ key: 'name', required: true, type: 'string', label: 'Name' }],
             perform: searchClients,
         },
+    },
+
+    sample: {
+        id: 1,
+        name: 'This is sample name',
     },
 };
 

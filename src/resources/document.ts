@@ -6,8 +6,9 @@ const Document = {
 
     create: {
         display: {
-            label: 'Add file',
+            label: 'Add File',
             description: 'Adds a new file to the project.',
+            important: true,
         },
         operation: {
             inputFields: [
@@ -23,6 +24,7 @@ const Document = {
         display: {
             label: 'New or Updated Document',
             description: 'Triggers when new document is added or status of document is modified.',
+            important: true,
         },
         operation: {
             inputFields: [
@@ -38,6 +40,7 @@ const Document = {
         display: {
             label: 'Find Documents',
             description: 'Finds documents filtered by name and/or client name.',
+            important: true,
         },
         operation: {
             inputFields: [
@@ -46,6 +49,31 @@ const Document = {
             ],
             perform: searchDocuments,
         },
+    },
+
+    sample: {
+        id: '1234567890abcdef12345678_10',
+        name: 'Sample document',
+        creationDate: '2021-01-22T12:42:32.166Z',
+        // deadline: '2021-01-22T16:30:00Z',
+        sourceLanguage: 'en',
+        documentDisassemblingStatus: 'success',
+        targetLanguage: 'es',
+        status: 'completed',
+        wordsCount: 489,
+        // statusModificationDate: '2021-01-23T09:16:53.565Z',
+        pretranslateCompleted: false,
+        workflowStages: [
+            {
+                progress: 100.0,
+                wordsTranslated: 489,
+                unassignedWordsCount: 489,
+                status: 'completed',
+                executives: [],
+            },
+        ],
+        externalId: '1234567890abcdef12345678',
+        placeholdersAreEnabled: false,
     },
 };
 

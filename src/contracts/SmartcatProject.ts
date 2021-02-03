@@ -30,7 +30,6 @@ export interface SmartcatProject {
     targetLanguages: string[];
     status: string;
     statusModificationDate: Date;
-    domainId: number;
     clientId: string;
     vendors: { vendorAccountId: string; removedFromProject: boolean }[];
     workflowStages: { progress: number; stageType: string }[];

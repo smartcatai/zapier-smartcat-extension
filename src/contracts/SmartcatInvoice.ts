@@ -1,7 +1,7 @@
-const dateFormat = require('dateformat');
 import { Bundle, ZObject } from 'zapier-platform-core';
 import { Servers } from '../tools/servers';
 import { Routes } from '../tools/routes';
+import dateFormat from 'dateformat';
 
 export interface SmartcatInvoice {
     id: string;
@@ -19,24 +19,14 @@ export interface GetInvoicesDto {
     skip?: number;
 }
 
-export async function getInvoices(z: ZObject, bundle: Bundle<GetInvoicesDto>): Promise<SmartcatInvoice[]> {
-    z.console.log(`from:${bundle.inputData.dateCreatedFrom}`);
-    z.console.log(`to:${bundle.inputData.dateCreatedTo}`);
-    let invoices: SmartcatInvoice[] = [];
-    const from = bundle.inputData.dateCreatedFrom;
-    const to = bundle.inputData.dateCreatedTo;
-
-    let i = 0;
-    const limit = 10;
-    while (true){
-        let batch = await getBatchOfInvoices(z, bundle.authData.server, new Date(from), new Date(to), i, limit);
-        batch.forEach(value => invoices.push(value));
-        if (batch.length < limit) return invoices;
-        i += limit;
-    }
-}
-
-async function getBatchOfInvoices(z: ZObject, server: string, from: Date, to: Date, skip: number, limit: number): Promise<SmartcatInvoice[]> {
+async function getBatchOfInvoices(
+    z: ZObject,
+    server: string,
+    from: Date,
+    to: Date,
+    skip: number,
+    limit: number,
+): Promise<SmartcatInvoice[]> {
     const formattedFrom = dateFormat(from, 'isoUtcDateTime');
     const formattedTo = dateFormat(to, 'isoUtcDateTime');
     const url = `https://${Servers[server]}${Routes.GetInvoiceList}?dateCreatedFrom=${formattedFrom}&dateCreatedTo=${formattedTo}&skip=${skip}&limit=${limit}`;
@@ -49,4 +39,21 @@ async function getBatchOfInvoices(z: ZObject, server: string, from: Date, to: Da
         item.id = item.number;
     });
     return items;
+}
+
+export async function getInvoices(z: ZObject, bundle: Bundle<GetInvoicesDto>): Promise<SmartcatInvoice[]> {
+    z.console.log(`from:${bundle.inputData.dateCreatedFrom}`);
+    z.console.log(`to:${bundle.inputData.dateCreatedTo}`);
+    const invoices: SmartcatInvoice[] = [];
+    const from = bundle.inputData.dateCreatedFrom;
+    const to = bundle.inputData.dateCreatedTo;
+
+    let i = 0;
+    const limit = 10;
+    while (true) {
+        const batch = await getBatchOfInvoices(z, bundle.authData.server, new Date(from), new Date(to), i, limit);
+        batch.forEach(value => invoices.push(value));
+        if (batch.length < limit) return invoices;
+        i += limit;
+    }
 }

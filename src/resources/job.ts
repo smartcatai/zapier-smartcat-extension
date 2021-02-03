@@ -6,7 +6,7 @@ const Job = {
 
     create: {
         display: {
-            label: 'Create job',
+            label: 'Create Job',
             description: 'Creates a new job.',
         },
 
@@ -14,7 +14,7 @@ const Job = {
             inputFields: [
                 { key: 'email', required: true, type: 'string', label: 'Supplier email' },
                 { key: 'name', required: true, type: 'string', label: 'Supplier name' },
-                { key: 'type', required: true, choice: SupplierType, type: 'string', label: 'Supplier type' },
+                { key: 'type', required: true, choices: SupplierType, type: 'string', label: 'Supplier type' },
                 { key: 'service', required: true, type: 'string', label: 'Service type' },
                 { key: 'description', required: true, type: 'string', label: 'Job description' },
                 { key: 'unit', required: true, type: 'string', label: 'Unit type' },
@@ -55,6 +55,10 @@ const Job = {
     //         perform: searchProjects
     //     }
     // },
+
+    sample: {
+        id: '1234567890abcdef',
+    },
 };
 
 export default Job;

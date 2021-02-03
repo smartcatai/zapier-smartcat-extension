@@ -5,7 +5,7 @@ const UpdateDocumentAction = {
 
     noun: 'Update',
     display: {
-        label: 'Update document',
+        label: 'Update Document',
         description: 'Update an existing document',
     },
 
@@ -16,6 +16,9 @@ const UpdateDocumentAction = {
             { key: 'name', required: true, type: 'string', label: 'File Name' },
         ],
         perform: updateFile,
+        sample: {
+            documents: [],
+        },
     },
 };
 

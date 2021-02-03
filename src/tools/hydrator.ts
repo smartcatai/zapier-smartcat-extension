@@ -2,7 +2,7 @@ import { Bundle, ZObject } from 'zapier-platform-core';
 import { Servers } from './servers';
 import { Routes } from './routes';
 
-export function downloadFile(z: ZObject, bundle: Bundle<{ exportId: string }>) {
+export function downloadFile(z: ZObject, bundle: Bundle<{ exportId: string }>): string {
     const url = `https://${Servers[bundle.authData.server]}/${Routes.CreateDocumentExport}/${
         bundle.inputData.exportId
     }`;

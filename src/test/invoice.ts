@@ -14,7 +14,7 @@ describe('Test Invoice CRUD', () => {
             },
             inputData: {
                 dateCreatedFrom: '2019-01-01T08:54:32.732Z',
-                dateCreatedTo: '2020-04-02T08:54:32.732Z'
+                dateCreatedTo: '2020-04-02T08:54:32.732Z',
             },
         };
         const response = (await appTester(App.resources.invoice.list.operation.perform, bundle)) as SmartcatInvoice[];
