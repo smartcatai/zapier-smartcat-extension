@@ -19,6 +19,7 @@ const Client = {
         display: {
             label: 'New or Updated Client',
             description: 'Triggers when a new client is created or the existing one is modified at Smartcat account.',
+            important: true,
         },
         operation: {
             perform: getClients,

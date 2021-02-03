@@ -29,6 +29,7 @@ const Vendor = {
         display: {
             label: 'Find Vendors',
             description: 'Finds vendors filtered by name.',
+            important: true,
         },
         operation: {
             inputFields: [{ key: 'name', type: 'string', label: 'Vendor Name' }],

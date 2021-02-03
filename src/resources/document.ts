@@ -8,6 +8,7 @@ const Document = {
         display: {
             label: 'Add File',
             description: 'Adds a new file to the project.',
+            important: true,
         },
         operation: {
             inputFields: [
@@ -23,6 +24,7 @@ const Document = {
         display: {
             label: 'New or Updated Document',
             description: 'Triggers when new document is added or status of document is modified.',
+            important: true,
         },
         operation: {
             inputFields: [
@@ -38,6 +40,7 @@ const Document = {
         display: {
             label: 'Find Documents',
             description: 'Finds documents filtered by name and/or client name.',
+            important: true,
         },
         operation: {
             inputFields: [

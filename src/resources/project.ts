@@ -17,6 +17,7 @@ const Project = {
         display: {
             label: 'Create Project',
             description: 'Creates a new project.',
+            important: true,
         },
         operation: {
             inputFields: [
@@ -67,6 +68,7 @@ const Project = {
         display: {
             label: 'New or Updated Project',
             description: 'Triggers when new project is added or status of project is modified.',
+            important: true,
         },
         operation: {
             inputFields: [
@@ -82,6 +84,7 @@ const Project = {
         display: {
             label: 'Find Projects',
             description: 'Finds projects filtered by name and/or client name.',
+            important: true,
         },
         operation: {
             inputFields: [

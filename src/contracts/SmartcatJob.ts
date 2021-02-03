@@ -19,6 +19,14 @@ export interface SmartcatJob {
     externalNumber: string;
 }
 
+export interface SmartcatJobResponse {
+    id: string;
+}
+
+export interface SmartcatJobsResponse {
+    jobs: string[];
+}
+
 export const SmartcatJobStatus = {
     inProgress: 'inProgress',
     invitationPending: 'invitationPending',
@@ -53,7 +61,7 @@ export const Currency = {
     cAD: 'CAD',
 };
 
-export async function createJob(z: ZObject, bundle: Bundle): Promise<SmartcatJob> {
+export async function createJob(z: ZObject, bundle: Bundle): Promise<SmartcatJobResponse> {
     const url = `https://${Servers[bundle.authData.server]}${Routes.CreateJob}`;
     const model = {
         supplierEmail: bundle.inputData.email,
@@ -70,10 +78,10 @@ export async function createJob(z: ZObject, bundle: Bundle): Promise<SmartcatJob
     const response = await z.request({ url: url, method: 'POST', body: model });
     if (response.status != 200) throw Error(response.content);
 
-    return z.JSON.parse(response.content) as SmartcatJob;
+    return { id: z.JSON.parse(response.content) as string };
 }
 
-export async function createJobs(z: ZObject, bundle: Bundle): Promise<any> {
+export async function createJobs(z: ZObject, bundle: Bundle): Promise<SmartcatJobsResponse> {
     const url = `https://${Servers[bundle.authData.server]}${Routes.CreateJobs}`;
     const data: {
         supplierEmail: any;
@@ -120,5 +128,5 @@ export async function createJobs(z: ZObject, bundle: Bundle): Promise<any> {
     if (response.status != 200) throw Error(response.content);
     // z.console.log(response.content);
 
-    return { jobs: z.JSON.parse(response.content) as SmartcatJob[] };
+    return { jobs: z.JSON.parse(response.content) as string[] };
 }

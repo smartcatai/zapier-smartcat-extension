@@ -62,22 +62,7 @@ const Jobs = {
     // },
 
     sample: {
-        id: 'string',
-        invoiceNumber: 'string',
-        supplierEmail: 'string',
-        supplierName: 'string',
-        supplierType: 'freelancer',
-        serviceType: 'string',
-        jobDescription: 'string',
-        unitsType: 'string',
-        unitsAmount: 0,
-        pricePerUnit: 0,
-        currency: 'string',
-        cost: 0,
-        externalNumber: 'string',
-        supplierId: 'string',
-        status: 'inProgress',
-        projectId: 'string',
+        jobs: ['1234567890abcdef', 'abcdef1234567890'],
     },
 };
 
